@@ -1,0 +1,330 @@
+\documentclass[10pt]{beamer}
+\usetheme{Warsaw}
+
+% |===| Package imports.
+
+\usepackage{
+  etex, graphicx, amssymb, amsmath, amstext, amsfonts, mathtools,
+  multicol, pgfplots, array, listings, colortbl, ulem, ifthen, xcolor,
+  xifthen, wrapfig
+}
+\usepackage[scaled=1]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes,arrows}
+
+\renewcommand{\baselinestretch}{1.2}
+
+% Trying to waste less space
+
+% \addtolength{\topmargin}{1pt}
+% \addtolength{\headsep}{5pt}
+% \addtolength{\oddsidemargin}{-4pt}
+% \addtolength{\marginparwidth}{20pt}
+% \addtolength{\marginparsep}{-3pt}
+% \addtolength{\textwidth}{-5pt}
+
+
+% |===| Beamer things.
+
+\input{conf/colors}
+\input{conf/beamer}
+
+% |===| Tikz things.
+
+\input{conf/tikz}
+
+% |===| Macros.
+
+\input{conf/macros}
+
+% |===| Nice links.
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=url,
+  urlcolor=url,
+  pdftitle={Programming Language Concepts: Abstract Machines}
+}
+
+
+% |===| Title page info.
+
+\title{
+  Programming Language Concepts\\[3em]
+  Abstract Machines\\[2em]
+}
+
+\author[]{
+  Adrien Champion\\
+  \href{mailto:adrien.champion@email.com}{adrien.champion@email.com}
+}
+
+
+\date{}
+
+\begin{document}
+\addtolength{\leftmargin}{-20pt}
+\addtolength{\rightmargin}{-20pt}
+
+
+
+\begin{frame}{}
+  \titlepage
+\end{frame}
+
+
+
+\section{Languages, programs and machines}
+
+
+\begin{frame}[fragile]{Notions}
+  \begin{define}{programming language}{}
+    a formalism with some ``instructions''
+  \end{define}
+
+  \begin{define}{program}{in language $\lang$}%
+    a finite sequence of instructions in $\lang$
+  \end{define}
+  \pause
+
+  \begin{define}{abstract machine}{for $\lang$}
+    any set of data structures and algorithms which can perform the
+    \daiji{storage and execution} of programs in $\lang$
+  \end{define}
+\end{frame}
+
+
+
+\begin{frame}{Abstract machines}
+  Abstract machines come in many flavors, but they share some traits.
+  \bigskip
+
+  They can
+  \medskip
+  \begin{itemize}
+  \item process \daiji{primitive data}
+  \item control the sequence of \daiji{execution of operations}
+  \item control \daiji{data transfers}
+  \item \daiji{manage memory}
+  \end{itemize}
+  \bigskip
+
+  \pause
+
+  More importantly they can \daiji{run}.
+\end{frame}
+
+
+
+
+\begin{frame}{Intuition}
+  \input{figures/abstract_machine}
+
+  \uncover<4->{
+    \input{figures/runtime_execution_cycle}
+  }
+\end{frame}
+
+
+
+\begin{frame}{Runtime}
+  As we saw, the runtime
+  \smallskip
+  \begin{itemize}
+  \item decides which instruction to execute next,
+  \item fetches the \daiji{instruction},
+  \item decodes it in terms of \daiji{primitive operations},
+  \item fetches the \daiji{operands},
+  \item \daiji{executes} the primitive operations,
+  \item stores the \daiji{result}.
+  \end{itemize}
+
+  \bigskip
+  \pause
+
+  What about \emph{memory management}?
+\end{frame}
+
+
+
+
+\begin{frame}{Memory management}
+  It can
+  \smallskip
+  \begin{itemize}
+  \item \emph{allocate} / \emph{free} memory,
+  \item handle the \emph{heap} / \emph{stack} (if any),
+  \item do garbage collection,
+  \item \emph{suspend} the execution of a program.
+  \end{itemize}
+
+  \pause
+  \bigskip
+
+  Ranges from simple to very complex depending on the abstract machine.
+\end{frame}
+
+
+
+
+\section{Organic example: mictyris guinotae}
+
+
+\begin{frame}{Soldier crabs}
+  \begin{minipage}{.5\textwidth}
+  Soldier crabs crossing path have a\\\daiji{deterministic} behavior
+  \\\smallskip
+  We can \daiji{build circuits} as lanes
+  \end{minipage}~\begin{minipage}{.49\textwidth}
+    \begin{center}
+      \begin{tikzpicture}
+        \def\sep{7}
+        \node [inner sep=0pt] at (0,0) {
+          \includegraphics[width = \textwidth]{soldier_crab}
+        } ;
+        \draw [
+          draw = bg, rounded corners=\sep, line width=\sep
+        ] (current bounding box.north west) -- 
+          (current bounding box.north east) --
+          (current bounding box.south east) --
+          (current bounding box.south west) --
+          cycle ;
+      \end{tikzpicture}\\
+      {\tiny
+        \url{http://www.gizmag.com/crab-computer-kobe/22145/}\\
+        \url{http://arxiv.org/pdf/1204.1749v1.pdf}
+      }
+    \end{center}
+  \end{minipage}
+  \pause
+  \begin{center}
+    \include{figures/crabs}
+  \end{center}
+\end{frame}
+
+
+
+\begin{frame}{Soldier crabs (runtime)}
+  \daiji{Sequence control / data transfer:} humans put crabs in lanes
+  \\\bigskip
+  \daiji{Processing primitive data:} only \code{bool} is supported
+  \begin{itemize}
+  \item \code{true}: a least a crab in the lane
+  \item \code{false}: no crab in the lane
+  \item processor: lanes (circuit) powered by crab legs and brain
+  \end{itemize}
+  \bigskip
+  \pause
+  Although it is \daiji{silly}, can we (at least in theory)
+  \begin{itemize}
+  \item do \daiji{arithmetic}? How?
+  \item implement sequence control / data transfer?
+  \end{itemize}
+\end{frame}
+
+
+
+
+\section{Hardware example}
+
+
+
+\begin{frame}{Memory}
+  Memory:
+  \begin{itemize}
+  \item composed of \emph{RAM}, \emph{caches} (L1, L2, L3), \ldots
+  \item stores \emph{words} of $32$ / $64$ bits
+  \item recognizes \daiji{primitive types}
+    (\textit{a.k.a.} \daiji{predefined types}):\\
+    booleans, integers, floats, characters, fixed-length sequences, \ldots
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Language}
+  Composed of simple instructions:
+  \centerline{\code{OpCode} \code{Operand1} \code{Operand2}}
+
+  \smallskip
+  For instance:
+  \begin{itemize}
+  \item add the \daiji{contents of registers} \code{R0} and \code{R5}, store result
+    in \code{R5}:\\
+    \centerline{\code{ADD} \code{R5} \code{R0}}
+  \item add the contents of the \daiji{memory cells} whose \daiji{addresses}
+    are stored in registers \code{R0} and \code{R5}, store result in the cell
+    \code{R5} \daiji{points to}:\\
+    \centerline{\code{ADD} \code{(R5)} \code{(R0)}}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Runtime}
+  \daiji{Sequence control:} \emph{Program Counter (PC)} (special register)
+  \begin{itemize}
+  \item contains the address of the \daiji{next instruction} to execute
+  \item supports operations like \emph{increment}, \emph{jump}, \ldots
+  \end{itemize}
+  \bigskip
+  \daiji{Processing primitive data:} \emph{Arithmetic and Logic Unit (ALU)}
+  \begin{itemize}
+  \item arithmetic (\code{int}, \code{float}) and logical (\code{bool})
+    operations
+  \end{itemize}
+  \bigskip
+  \daiji{Data transfer:}
+  \begin{itemize}
+  \item special registers (MAR / MDR) bridge the memory / CPU gap
+  \item handles different \emph{addressing modes}
+  \item operations to load data in the CPU's registers are provided
+  \end{itemize}
+\end{frame}
+
+
+
+
+\section{Implementation}
+
+
+
+\begin{frame}{Trade-off}
+  Implementing a machine for a language is a trade-off between
+  \begin{itemize}
+  \item \daiji{performance}
+  \item \daiji{flexibility} -- when the language evolves
+  \item \daiji{portability} -- diffusion of \emph{executables}
+  \end{itemize}
+  \bigskip
+  Eventually, code will run on a \emph{physical} machine, the \daiji{hardware}.
+  \pause
+  \\\bigskip
+  Hardware-level is the reference \daiji{performance-wise}:\\
+  can't go faster than hardware by definition.
+\end{frame}
+
+
+\begin{frame}{Implementation levels}
+  \daiji{Hardware}
+  \begin{itemize}
+  \item very fast
+  \item need to build new machines when language changes
+  \item can't share executable with different machines
+  \end{itemize}
+  \bigskip
+  \daiji{Software}
+  \begin{itemize}
+  \item very slow (compared to hardware) (why?)
+  \item easy to propagate changes in the language
+  \item can share with different machines (if runtime installed)
+  \end{itemize}
+  \bigskip
+  \daiji{Firmware}\\
+  compromise between hardware and software
+\end{frame}
+
+
+
+\end{document}

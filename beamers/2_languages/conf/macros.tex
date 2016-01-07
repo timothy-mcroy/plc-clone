@@ -1,0 +1,100 @@
+% |===| Formatting.
+
+\newcommand{\daiji}[1]{\textcolor{daiji}{#1}}
+\newcommand{\code}[1]{{\small\texttt{\textcolor{code}{#1}}}}
+\renewcommand{\emph}[1]{\textit{\textcolor{emph}{#1}}}
+\newcommand{\bigsep}{\itemsep1.2em}
+
+
+
+% |===| Listings.
+
+\lstdefinelanguage{rust_lst}{
+  alsoletter={'},
+  % backgroundcolor=\color{white},
+  basicstyle = { \scriptsize\ttfamily },
+%
+% Lifetimes.
+%
+  keywords=[1]{},
+  keywordstyle=[1]\color{cstm_green},
+  keywordsprefix=',
+%
+  morekeywords=[2]{ % Orange
+    struct, enum, trait, impl, use, for, while, loop, in, fn, let, pub
+  },
+  keywordstyle=[2]\color{cstm_orange},
+%
+  morekeywords=[3]{
+    if, then, else, match, =>, ->
+  },
+  keywordstyle=[3]{\bf\ttfamily\color{foreground!70!yellow}},
+%
+  morekeywords=[4]{ % Types.
+    Self, usize, isize, fsize,
+    u8, u16, u32, u64,
+    i8, i16, i32, i64,
+    f8, f16, f32, f64,
+    str, String, Vec, Option, Result,
+    \{, \}
+  },
+  keywordstyle=[4]{\bf\color{balance}},
+%
+  morekeywords=[5]{
+    mut, break, continue, return, !
+  },
+  keywordstyle=[5]\color{cstm_red},
+%
+  morekeywords=[6]{
+    self
+  },
+  keywordstyle=[6]\color{balance!90!background},
+%
+  stringstyle=\color{cstm_yellow},
+%
+% Macros
+%
+  literate=*%
+    {!}{{\textcolor{cstm_red}{!}}}1
+    {\&}{{\textcolor{cstm_green}{\&}}}1
+    {->}{{$\to$}}2,
+%
+% Comments
+%
+  morecomment=[l]{//},
+  morecomment=[n]{/*}{*/},
+%
+  morecomment=[n][\color{balance!80!background}]{/**}{*/},
+  morecomment=[n][\color{balance!80!background}]{/*!}{*/},
+  morecomment=[l][\color{balance!80!background}]{///},
+  morecomment=[l][\color{balance!80!background}]{//!},
+%
+  morestring=[b]",
+  morestring=[b]""",
+  % breakatwhitespace=false,
+  % breaklines=true,
+  % captionpos=b,
+  commentstyle=\color{balance!30!background}\it\bfseries,
+  % deletekeywords={...},
+  % escapeinside={\%*}{*)},
+  % extendedchars=true,
+  frame=l,
+  % keepspaces=true,
+  % keywordstyle=\color{blue},
+  % otherkeywords={*,...},
+  % numbers=left,
+  % numbersep=5pt,
+  % numberstyle=\tiny\color{mygray},
+  % rulecolor=\color{black},
+  sensitive=true,
+  % showspaces=false,
+  showstringspaces=false,
+  % showtabs=false,
+  % stepnumber=2,
+  % stringstyle=\color{mymauve},
+  % tabsize=2
+}
+\lstnewenvironment{rust}{
+  \lstset{ language = rust_lst }
+}{
+}

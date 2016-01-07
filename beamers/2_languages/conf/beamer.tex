@@ -1,0 +1,80 @@
+\setbeamercolor{normal text}{
+  fg = foreground, bg = background
+}
+\setbeamercolor{structure}{
+  fg = foreground, bg = background
+}
+
+\setbeamercolor{alerted text}{
+  fg = red!85!background
+}
+
+\setbeamercolor{item projected}{
+  use = item, fg = background, bg = item.fg!35!balance
+}
+
+\setbeamercolor*{palette primary}{
+  use = structure, fg = structure.fg
+}
+\setbeamercolor*{palette secondary}{
+  use = structure, fg = structure.fg!95!background
+}
+\setbeamercolor*{palette tertiary}{
+  use = structure, fg = structure.fg!90!background
+}
+\setbeamercolor*{palette quaternary}{
+  use = structure, fg = structure.fg!95!background, bg = background
+}
+
+\setbeamercolor*{framesubtitle}{
+  fg = background!40
+}
+
+\setbeamercolor*{block title}{
+  parent = structure, fg = background, bg = cstm_blue!70!balance
+}
+\setbeamerfont*{block title}{
+  series = \bfseries
+}
+\setbeamercolor*{block body}{
+  fg = foreground, bg = background!83!balance
+}
+\setbeamercolor*{block title alerted}{
+  parent = alerted text, bg = background!15!balance
+}
+\setbeamercolor*{block title example}{
+  parent = example text,bg = background!15!balance
+}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{frametitle}{
+  \large\insertframetitle\hfill\small\insertsection
+}
+\setbeamertemplate{footline}{}
+% \setbeamertemplate{footline}[frame number]{}
+% \setbeamerfont{footline}{family = \rmfamily, series = \mdseries, size = \small}
+% \setbeamercolor{footline}{ fg = balance }
+
+\setbeamertemplate{itemize item}{\textbullet}
+
+
+% |===| TOC things.
+
+\AtBeginSection{
+  \begin{frame}
+  \frametitle{Contents}
+  \tiny{\tableofcontents[hideallsubsections, currentsection]}
+  \end{frame}
+}
+
+\setbeamertemplate{sections/subsections in toc}[circle]
+\setbeamerfont{section in toc}{
+  size = \large
+}
+\setbeamerfont{section number projected}{
+  series = \bfseries, size = \large
+}
+\setbeamercolor{section number projected}{
+  bg = foreground, fg = background
+}

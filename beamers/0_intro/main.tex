@@ -1,0 +1,593 @@
+\documentclass[10pt]{beamer}
+\usetheme{Warsaw}
+
+% |===| Package imports.
+
+\usepackage{
+  etex, graphicx, amssymb, amsmath, amstext, amsfonts, mathtools,
+  multicol, pgfplots, array, listings, colortbl, ulem, ifthen, xcolor
+}
+\usepackage[scaled=1]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes,arrows}
+
+\renewcommand{\baselinestretch}{1.2}
+
+% Trying to waste less space
+
+% \addtolength{\topmargin}{1pt}
+% \addtolength{\headsep}{5pt}
+% \addtolength{\oddsidemargin}{-4pt}
+% \addtolength{\marginparwidth}{20pt}
+% \addtolength{\marginparsep}{-3pt}
+% \addtolength{\textwidth}{-5pt}
+
+
+% |===| Beamer things.
+
+\input{conf/colors}
+\input{conf/beamer}
+
+% |===| Tikz things.
+
+\input{conf/tikz}
+
+% |===| Macros.
+
+\input{conf/macros}
+
+% |===| Nice links.
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=url,
+  urlcolor=url,
+  % /!\ REMEMBER TO CHANGE THIS. /!\
+  pdftitle={Programming Language Concepts: Intro}
+}
+
+
+% |===| Title page info.
+
+\title{
+  Programming Language Concepts\\[3em]
+  Introduction\\[2em]
+}
+
+\author[]{
+  Adrien Champion\\
+  \href{mailto:adrien.champion@email.com}{adrien.champion@email.com}
+}
+
+
+\date{}
+
+\begin{document}
+\addtolength{\leftmargin}{-20pt}
+\addtolength{\rightmargin}{-20pt}
+
+
+
+\begin{frame}{}
+  \titlepage
+\end{frame}
+
+
+
+\section{About the class}
+
+
+
+
+\begin{frame}[fragile,t]{Programming languages}
+
+\vspace{4em}
+
+From sources to ``executable''
+\medskip
+
+\alt<2->{
+  Type system
+  \medskip
+
+  \alt<3->{
+    Memory management
+    \medskip
+
+    \alt<4->{
+      Abstraction mechanisms
+      \medskip
+
+      \alt<5->{
+        Misc.
+        \medskip
+        \alt<6->{
+        }{
+          \begin{itemize}
+            \item compiler plugins
+            \item macros
+            \item identation-has-semantics
+            \item expressions over statements
+          \end{itemize}
+        }
+      }{
+        \begin{itemize}
+          \item structures
+          \item objects
+          \item modules
+          \item algebraic data types
+          \item type classes (traits)
+        \end{itemize}
+      }
+    }{
+      \begin{itemize}
+        \item manual
+        \item heap / stack
+        \item garbage collection
+      \end{itemize}
+    }
+  }{
+    \begin{itemize}
+      \item none
+      \item weak
+      \item strong
+      \item super-strong
+    \end{itemize}
+  }
+}{
+  \begin{itemize}
+    \item compile
+    \item interpret
+  \end{itemize}
+}
+
+\end{frame}
+
+
+
+
+\begin{frame}{Guidelines}
+
+Software:
+\medskip
+\begin{itemize}
+  \item (private) version control (\daiji{bitbucket} or \daiji{github})
+  \item \daiji{Rust} compiler (\code{rustc}) and project manager (\code{cargo})
+  \item unix-based system recommended (\daiji{VM} on Windows)
+\end{itemize}
+\bigskip
+
+\pause
+
+Resources for Rust:\\
+\medskip
+\begin{tabular}{r l}
+  official & \url{https://www.rust-lang.org/} \\
+  online compiler & \url{https://play.rust-lang.org/} \\
+  tutorial & \url{https://doc.rust-lang.org/stable/book/} \\
+  & \url{http://rustbyexample.com/} \\
+  API & \url{https://doc.rust-lang.org/stable/std/} \\
+  libraries & \url{https://crates.io/} \\
+\end{tabular}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{Assignments / Projects}
+
+\begin{itemize}
+  \bigsep
+  \item you \daiji{can} discuss ideas / algorithms
+  \item you \daiji{\bf CANNOT} share code
+  \item I \daiji{will not} deal with cheating, the university will
+\end{itemize}
+\bigskip
+
+\pause
+
+Assignments in \daiji{Rust}:
+
+\begin{itemize}
+  \item \emph{$2048$}
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{Roadmap}
+
+\[
+  \begin{array}{r l}
+    \left.
+    \begin{aligned}
+      \text{Abstract machines}\\
+      \text{Describing a language}\\
+      \text{Foundations}\\
+      \text{Memory management}\\
+    \end{aligned}
+    \uncover<2->{\quad\right\rbrace} &
+    \uncover<2->{
+      \text{
+        \begin{tabular}{c}
+          theory and \daiji{runtime}
+        \end{tabular}
+      }
+    } \\\\
+    \uncover<3->{
+      \left.
+      \begin{aligned}
+        \text{Names and environment}\\
+        \text{Control structures}\\
+        \text{Control abstraction}\\
+        \text{Structuring data}\\
+        \text{Data abstraction}\\
+      \end{aligned}
+    }
+    \uncover<4->{\quad\right\rbrace} &
+    \uncover<4->{
+      \text{
+        \begin{tabular}{c}
+          abstractions, control flow, and\\
+          from \daiji{source} to \daiji{target}
+        \end{tabular}
+      }
+    }
+  \end{array}
+\]
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{Your experience}
+
+Which languages have you used or just know about?
+\bigskip
+
+What about them?
+\medskip
+\begin{itemize}
+  \item in which context are they typically used? (web, software, \ldots)
+  \item compiled or interpreted?
+  \item memory management?
+  \item type system?
+  \item abstraction mechanisms?
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+\section{Rust}
+
+
+
+\begin{frame}{Memory management}
+  \emph{Life cycle} of memory is always the same:
+  \smallskip
+  \begin{itemize}
+    \item \daiji{allocate} memory you need
+    \item \daiji{use} it (read / write)
+    \item \daiji{free} the memory when it is not used anymore
+  \end{itemize}
+  \medskip
+
+  Generally speaking,
+  \begin{itemize}
+    \item \daiji{allocation} is manual, happens when declaring a variable
+    \item \daiji{using} memory is manual: actual code
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Memory management}
+  \daiji{Freeing} memory is a challenge, in mainstream languages it can be
+  \begin{itemize}
+    \item \emph{manual}: \code{malloc} / \code{free}\\
+      \hfill C (\emph{1970}), C++\\
+      very old-skool
+    \item \emph{automatic} at runtime: garbage collection\\
+      \hfill Java (\emph{1995}), C\#, JavaScript, Python, F\#, OCaml, \ldots\\
+      \pause
+      Actually invented in \daiji{1959} for the Lisp language\\
+      pretty old-skool too
+  \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Memory management}
+  \emph{Garbage collection} (GC):
+  \begin{itemize}
+    \item \daiji{easy} to use, because transparent to the developer
+    \item memory is \emph{automagically} freed when ``not used anymore''
+    \item<2-> \daiji{problem}: \emph{magic} is expensive in CS
+  \end{itemize}
+  \bigskip\uncover<3->{
+    \emph{Manual memory management}:
+    \begin{itemize}
+      \item \daiji{no overhead}, developer frees memory manually\\
+      \item<4-> but very complex and thus \daiji{error-prone} (memory leaks)
+      \item<4-> \daiji{Nightmare} for concurrent programs sharing data
+    \end{itemize}
+  }
+  \bigskip
+  \uncover<5->{
+    In general developers \daiji{$\heartsuit$} garbage collection:\\
+    mindless, and fast hardware hides the overhead anyway\ldots
+  }
+\end{frame}
+
+
+
+
+\begin{frame}{Problem solved?}
+  \emph{GC} shows its limits when doing \daiji{expensive computations},\\
+  with a lot of allocation
+  \bigskip
+
+  \begin{itemize}
+    \item \daiji{HPC} \hfill (High Performance Calculus, applied maths),
+    \item solving problems with \daiji{exponential complexity},
+    \item \daiji{web browsers} \hfill (surprisingly expensive),
+    \item \ldots
+  \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Rust}
+
+Why Rust?
+
+\begin{center}
+  \url{http://www.cnet.com/news/samsung-joins-mozillas-quest-for-rust/}
+\end{center}
+
+\bigskip
+
+\begin{tabular}{r l | r}
+\pause $\bullet$ &
+  memory / thread \daiji{safety} &
+  strong typing, ownership,\\
+& &
+  regional memory management\\\hline
+
+\pause $\bullet$ &
+  powerful \daiji{abstractions} &
+  first-class functions, type classes\\\hline
+
+\pause $\bullet$ &
+  \daiji{defensive} approach &
+  \code{Result} / \code{Option} instead of\\
+& &
+   exceptions and \code{null}\\\hline
+
+\pause $\bullet$ &
+  \daiji{performance} &
+  compiles to LLVM,\\
+& &
+  no garbage collection\\
+\end{tabular}
+
+% \bigskip
+% \pause
+
+% Goals:
+
+% \begin{itemize}
+% \item safety and security
+% \item maintainability
+% \item extensibility
+% \end{itemize}
+
+\end{frame}
+
+
+
+
+\begin{frame}{Rust, in short}
+
+  \begin{itemize}
+    \item \daiji{safety} and \daiji{performance} first
+    \item support for \daiji{concurrency}
+    \item hi-level \daiji{abstractions}
+    \item avoid error-prone \daiji{paradigms}
+  \end{itemize}
+
+\end{frame}
+
+
+% \begin{frame}[fragile]{\daiji{$2048$}: data abstraction}
+
+% \begin{minipage}[t]{.5\textwidth}
+
+% \daiji{Structs}
+% \medskip
+
+% \lstset{language = rust_lst}
+% \begin{lstlisting}
+% /// Power of two in a cell.
+% pub struct Cell {
+%   pow: u32,
+% }
+% \end{lstlisting}
+
+% Gather data in a single structure
+
+% \end{minipage}%
+% %
+% ~%
+% %
+% \begin{minipage}[t]{.5\textwidth}
+
+% \daiji{Enums}
+% \medskip
+
+% \lstset{language = rust_lst}
+% \begin{lstlisting}
+% /// *Swipe* directions.
+% pub enum Dir {
+%   Up, Dw, Lf, Rg,
+% }
+% \end{lstlisting}
+
+% Alternatives of what the value can be
+
+% \end{minipage}
+
+% \end{frame}
+
+
+
+
+
+
+% \begin{frame}[fragile]{Malloc / free (intuition)}
+
+% \begin{minipage}[t]{.39\textwidth}
+% \begin{rust}
+% let res = {
+%   let lhs = 42 ;
+%   let rhs = 7  ;
+%   lhs + rhs
+% } ;
+% \end{rust}
+% \medskip
+% What happens at runtime?
+% \end{minipage}~\begin{minipage}[t]{.60\textwidth}
+% \pause
+% \begin{rust}
+% let ref_res = malloc(64) ;
+% let ref_lhs = malloc(64) ; * ref_lhs = 42 ;
+% let ref_rhs = malloc(64) ; * ref_rhs = 7  ;
+% * ref_res = * ref_lhs + * ref_rhs ;
+% free(ref_lhs) ; free(ref_rhs)
+% \end{rust}
+% \end{minipage}
+
+% \bigskip
+% \pause
+
+% \begin{center}
+%   \input{figures/allocation}
+% \end{center}
+
+% \end{frame}
+
+
+
+
+
+
+% \begin{frame}[fragile]{Garbage collection (intuition)}
+
+% \begin{minipage}[t]{.39\textwidth}
+% \begin{rust}
+% let res = {
+%   let lhs = 42 ;
+%   let rhs = 7  ;
+%   lhs + rhs
+% } ;
+% \end{rust}
+% \medskip
+% What happens at runtime?
+% \end{minipage}~\begin{minipage}[t]{.60\textwidth}
+% \pause
+% \begin{rust}
+% let ref_res = malloc(64) ;
+% let ref_lhs = malloc(64) ; * ref_lhs = 42 ;
+% let ref_rhs = malloc(64) ; * ref_rhs = 7  ;
+% * ref_res = * ref_lhs + * ref_rhs ;
+% free(ref_lhs) ; free(ref_rhs)
+% \end{rust}
+% \end{minipage}
+
+% \end{frame}
+
+
+
+
+
+
+
+% \section{Test frames}
+
+
+
+% \begin{frame}{Block example}
+
+%   \begin{block}{Block's title}
+%     This is the content of the block.
+%   \end{block}
+
+% \end{frame}
+
+
+
+
+% \begin{frame}[fragile]{Rust example}
+
+% \lstset{language = rust_lst}
+% \begin{lstlisting}
+% /// A trait.
+% pub trait MyTrait {
+%   fn mk() -> Self ;
+%   fn set(& mut self, usize) ;
+% }
+
+% /** A structure. */
+% pub struct MyStruct {
+%   field: usize
+% }
+% // Implementation of the structure.
+% impl MyStruct {
+%   /// Public constructor.
+%   pub fn of(n: usize) -> Self {
+%     MyStruct { field: n } /* This is how you create a structure. */
+%   }
+%   pub fn to_str(&self, pref: & 'static str) -> String {
+%     format!("{}{}", pref, self.field)
+%   }
+% }
+% impl MyTrait for MyStruct {
+%   fn mk() -> Self { self.of(0) }
+%   fn set(& mut self, n: usize) { self.field = n }
+% }
+% \end{lstlisting}
+
+% \end{frame}
+
+
+
+
+
+
+% \begin{frame}{Tikz example}
+
+%   \input{figures/test}
+
+% \end{frame}
+
+
+
+
+
+\end{document}

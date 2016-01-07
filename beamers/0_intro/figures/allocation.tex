@@ -1,0 +1,134 @@
+\begin{tikzpicture}
+
+\def\blkW{0.2}
+\def\blkH{0.05}
+
+\def\resX{1.7}
+\def\resY{1.8}
+
+\def\lhsX{0.2}
+\def\lhsY{0.8}
+
+\def\rhsX{1.5}
+\def\rhsY{0.7}
+
+\def\keyX{3}
+\def\keyY{2}
+\def\keySep{0.7}
+
+% Memory.
+\node[
+  rect, round, anchor = south west, thick,
+  text width = 6em, text height = 6em
+] (memory) at (0,0) {} ;
+\node[
+  empty, anchor = south
+] () at (memory.south) {Memory} ;
+
+% `res`.
+\uncover<4->{
+  \draw[
+    rect, thick
+  ] (\rhsX,         \rhsY        ) --
+    (\rhsX,         \rhsY + \blkH) --
+    (\rhsX + \blkW, \rhsY + \blkH) --
+    (\rhsX + \blkW, \rhsY        ) --
+    cycle
+  ;
+}
+\uncover<5->{
+  \node[empty, anchor = west] (refRes) at (\keyX, \keyY - 2 * \keySep) {
+    \small
+    \code{ref\_res}
+    \alt<10->{
+      \begin{tabular}{|c|}
+        \hline\ldots 0 0 1 1 0 0 0 1\\\hline
+      \end{tabular}
+    }{
+      \begin{tabular}{|c|}
+        \hline\ldots 0 0 0 0 0 0 0 0\\\hline
+      \end{tabular}
+    }
+  } ;
+}
+\uncover<5>{
+  \draw[arrow, thick, drw_blue] (
+    \rhsX + \blkW, \rhsY + 0.5 * \blkH
+  ) -- (refRes.west) ;
+}
+\uncover<10>{
+  \draw[arrow, thick, drw_blue] (
+    \rhsX + \blkW, \rhsY + 0.5 * \blkH
+  ) -- (refRes.west) ;
+}
+
+% `lhs`.
+\uncover<6-10>{
+  \draw[
+    rect, thick
+  ] (\resX,         \resY        ) --
+    (\resX,         \resY + \blkH) --
+    (\resX + \blkW, \resY + \blkH) --
+    (\resX + \blkW, \resY        ) --
+    cycle
+  ;
+  \node[empty, anchor = west] (refLhs) at (\keyX, \keyY) {
+    \small
+    \code{ref\_lhs}
+    \alt<7->{
+      \begin{tabular}{|c|}
+        \hline\ldots 0 0 1 0 1 0 1 0\\\hline
+      \end{tabular}
+    }{
+      \begin{tabular}{|c|}
+        \hline\ldots 0 0 0 0 0 0 0 0\\\hline
+      \end{tabular}
+    }
+  } ;
+}
+\uncover<6-7>{
+  \draw[arrow, thick, drw_blue] (
+    \resX + \blkW, \resY + 0.5 * \blkH
+  ) -- (refLhs.west) ;
+}
+
+\uncover<10>{
+  \node[empty] () at (\keyX, \keyY - 0.5*\keySep) {$+$} ;
+}
+
+% `rhs`.
+\uncover<12>{}
+\uncover<8-11>{
+  \draw[
+    rect, thick
+  ] (\lhsX,         \lhsY        ) --
+    (\lhsX,         \lhsY + \blkH) --
+    (\lhsX + \blkW, \lhsY + \blkH) --
+    (\lhsX + \blkW, \lhsY        ) --
+    cycle
+  ;
+  \node[empty, anchor = west] (refRhs) at (\keyX, \keyY - \keySep) {
+    \small
+    \code{ref\_rhs}
+    \alt<9->{
+      \begin{tabular}{|c|}
+        \hline\ldots 0 0 0 0 0 1 1 1\\\hline
+      \end{tabular}
+    }{
+      \begin{tabular}{|c|}
+        \hline\ldots 0 0 0 0 0 0 0 0\\\hline
+      \end{tabular}
+    }
+  } ;
+}
+\uncover<8-9>{
+  \draw[arrow, thick, drw_blue] (
+    \lhsX + \blkW, \lhsY + 0.5 * \blkH
+  ) -- (refRhs.west) ;
+}
+
+\uncover<10>{
+  \node[empty] () at (\keyX, \keyY - 1.5*\keySep) {$=$} ;
+}
+
+\end{tikzpicture}

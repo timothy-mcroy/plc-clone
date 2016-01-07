@@ -1,0 +1,24 @@
+\documentclass{standalone}
+\usepackage{tikz,amssymb,amsmath,amstext,amsfonts,pgfplots}
+
+\usetikzlibrary{shapes,arrows,shadows}
+
+\newcommand{\po}[1]{\mathcal{P}_{#1}}
+\newcommand{\lemma}[1]{\mathcal{L}_{#1}}
+
+\begin{document}
+
+\tikzstyle{empty box}=[
+  draw=black, fill=none, text centered, anchor=west,
+  drop shadow, minimum height=2.5em, minimum width=6em
+]
+\tikzstyle{nice box}=[
+  empty box, fill=blue!20
+]
+\tikzstyle{channel box}=[nice box, fill=red!15]
+\tikzstyle{sensor box}=[empty box]
+\tikzstyle{world box}=[nice box, fill=green!15]
+
+\input{fileName}
+
+\end{document}

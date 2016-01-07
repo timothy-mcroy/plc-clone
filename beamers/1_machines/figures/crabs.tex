@@ -1,0 +1,67 @@
+\begin{tikzpicture}
+
+% |===| AND gate.
+
+\node[empty, anchor = east] (a) at (0,2) {\code{a}} ;
+\node[empty, anchor = east] (b) at (0,0) {\code{b}} ;
+\node[empty, anchor = west] (c) at (3,1) {\code{a \&\& b}} ;
+
+\uncover<3->{
+  \node[empty, anchor = east] () at (a.west) {\daiji{\textbf{$\top$}}} ;
+} ;
+\uncover<3-6>{
+  \node[empty, anchor = east] () at (b.west) {\textbf{$\bot$}} ;
+} ;
+\uncover<7->{
+  \node[empty, anchor = east] () at (b.west) {\daiji{\textbf{$\top$}}} ;
+} ;
+\uncover<6>{
+  \node[empty, anchor = north] () at (c.south) {\textbf{$\bot$}} ;
+} ;
+\uncover<10>{
+  \node[empty, anchor = north] () at (c.south) {\daiji{\textbf{$\top$}}} ;
+} ;
+
+\alt<4-6>{
+  \alt<5->{
+    \draw[line, drw_red] (a.east) -- (1.5,1) ;
+  }{
+    \draw[arrow, drw_red] (a.east) -- (1.5,1) ;
+  }
+}{
+  \alt<8->{
+    \alt<9->{
+      \draw[line, drw_red] (a.east) -- (1.5,1) ;
+    }{
+      \draw[arrow, drw_red] (a.east) -- (1.5,1) ;
+    }
+  }{
+    \draw[line] (a.east) -- (1.5,1) ;
+  }
+}
+\alt<8->{
+  \alt<9->{
+    \draw[line, drw_red] (b.east) -- (1.5,1) ;
+  }{
+    \draw[arrow, drw_red] (b.east) -- (1.5,1) ;
+  }
+}{
+  \draw[line] (b.east) -- (1.5,1) ;
+}
+\alt<9->{
+  \draw[arrow, drw_red] (1.5,1) -- (c.west) ;
+}{
+  \draw[line] (1.5,1) -- (c.west) ;
+}
+
+\node[empty] (void1) at (2,2.2) {} ;
+\node[empty] (void2) at (2,-.2) {} ;
+
+\draw[line] (1.5,1) to[out = 45, in = -90] (void1) ;
+\alt<5-6>{
+  \draw[arrow, drw_red] (1.5,1) to[out = -45, in = 90] (void2) ;
+}{
+  \draw[line] (1.5,1) to[out = -45, in = 90] (void2) ;
+} ;
+
+\end{tikzpicture}

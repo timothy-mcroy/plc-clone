@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+
+\node[rect, round, txt_yellow] (n1) at (0,0) { a node } ;
+\node[circ, drw_green, fil_blue, txt_red] (n2) at (3,3) { another node } ;
+\node[elli, drw_orange] (n3) at (3,0) { Y.A. node } ;
+
+\draw[arrow] (n1) to[out=90, in=180] (n2) ;
+\draw[arrow] (n2) to[out=0, in=0] (n3) ;
+
+\end{tikzpicture}

@@ -1,0 +1,151 @@
+\documentclass[10pt]{beamer}
+\usetheme{Warsaw}
+
+% |===| Package imports.
+
+\usepackage{
+  etex, graphicx, amssymb, amsmath, amstext, amsfonts, mathtools,
+  multicol, pgfplots, array, listings, colortbl, ulem, ifthen, xcolor
+}
+\usepackage[scaled=1]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes,arrows}
+
+\renewcommand{\baselinestretch}{1.2}
+
+% Trying to waste less space
+
+% \addtolength{\topmargin}{1pt}
+% \addtolength{\headsep}{5pt}
+% \addtolength{\oddsidemargin}{-4pt}
+% \addtolength{\marginparwidth}{20pt}
+% \addtolength{\marginparsep}{-3pt}
+% \addtolength{\textwidth}{-5pt}
+
+
+% |===| Beamer things.
+
+\input{conf/colors}
+\input{conf/beamer}
+
+% |===| Tikz things.
+
+\input{conf/tikz}
+
+% |===| Macros.
+
+\input{conf/macros}
+
+% |===| Nice links.
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=url,
+  urlcolor=url,
+  pdftitle={Programming Language Concepts: Languages}
+}
+
+
+% |===| Title page info.
+
+\title{
+  Programming Language Concepts\\[3em]
+  Languages\\[2em]
+}
+
+\author[]{
+  Adrien Champion\\
+  \href{mailto:adrien.champion@email.com}{adrien.champion@email.com}
+}
+
+
+\date{}
+
+\begin{document}
+\addtolength{\leftmargin}{-20pt}
+\addtolength{\rightmargin}{-20pt}
+
+
+
+\begin{frame}{}
+  \titlepage
+\end{frame}
+
+
+
+\section{Levels of description}
+
+
+\begin{frame}{Theory of signs}
+
+Morris $1946$, ``Writings on the general theory of signs''\\
+\medskip
+
+Three levels of description:
+
+\medskip
+
+\begin{tabular}{r l | c}
+$\bullet$ &
+  \daiji{grammar} &
+  which sentences are correct?\\
+$\bullet$ &
+  \daiji{semantics} &
+  what do correct sentences mean?\\
+$\bullet$ &
+  \daiji{pragmatics} &
+  how do we use meaningful sentences?\\
+\end{tabular}
+
+\bigskip
+
+\pause
+
+Examples:
+\medskip
+
+\begin{tabular}{r c | l}
+$\bullet$ &
+  \emph{Sweet love you me.} &
+  \uncover<3->{incorrect grammar-wise}\\
+$\bullet$ &
+  \uncover<4->{\emph{It's sweet that you love me.}} &
+  \uncover<5->{correct}\\
+$\bullet$ &
+  \uncover<6->{\emph{Your person loving myself is a fact}} &
+  \uncover<7->{correct but not very}\\
+&
+  \uncover<6->{\emph{that I would qualify as being sweet.}} &
+  \uncover<7->{idiomatic}\\
+\end{tabular}
+
+\end{frame}
+
+
+
+\begin{frame}{In programming}
+
+For programming languages
+\medskip
+
+\begin{tabular}{r l c l}
+$\bullet$ &
+  grammar: &
+  \emph{static} &
+  \uncover<2->{compile time}\\
+$\bullet$ &
+  semantics: &
+  \emph{dynamic} &
+  \uncover<3->{compile / runtime}\\
+$\bullet$ &
+  pragmatics: &
+  \emph{human} &
+  \uncover<4->{code-writing time}\\
+\end{tabular}
+
+\end{frame}
+
+\end{document}

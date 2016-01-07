@@ -1,0 +1,196 @@
+\begin{tikzpicture}
+
+\def\hght{4}
+\def\wdth{3}
+\def\sep{1}
+\def\inSep{.2}
+
+\small
+
+
+% |===| Memory.
+
+\draw[rect, round]
+  (0,0) -- (\wdth,0) -- (\wdth,\hght) -- (0,\hght) -- cycle ;
+\node[
+  empty, minimum height = 1pt, anchor = south, align = center
+] () at (.5*\wdth,\hght) {Memory} ;
+
+\def\memInWdth#1{#1*\wdth-#1*2*\inSep}
+\def\memInHght#1{#1*0.5*\hght-#1*1.5*\inSep}
+
+\alt<5,10>{
+  \draw[rect, round, drw_green]
+    (\inSep,\inSep) --
+    (\inSep+\memInWdth{1},\inSep) --
+    (\inSep+\memInWdth{1},\inSep+\memInHght{1}) --
+    (\inSep,\inSep+\memInHght{1}) --
+    cycle ;
+  \node[empty, align = center] () at (
+    \inSep+\memInWdth{.5},\inSep+\memInHght{.5}
+  ) {\daiji{Program}} ;
+}{
+  \draw[rect, round]
+    (\inSep,\inSep) --
+    (\inSep+\memInWdth{1},\inSep) --
+    (\inSep+\memInWdth{1},\inSep+\memInHght{1}) --
+    (\inSep,\inSep+\memInHght{1}) --
+    cycle ;
+  \node[empty, align = center] () at (
+    \inSep+\memInWdth{.5},\inSep+\memInHght{.5}
+  ) {Program} ;
+}
+
+\alt<7,9>{
+  \draw[rect, round, drw_green]
+    (\inSep,2*\inSep+\memInHght{1}) --
+    (\inSep+\memInWdth{1},2*\inSep+\memInHght{1}) --
+    (\inSep+\memInWdth{1},2*\inSep+\memInHght{1}+\memInHght{1}) --
+    (\inSep,2*\inSep+\memInHght{1}+\memInHght{1}) --
+    cycle ;
+  \node[empty, align = center] () at (
+    \inSep+\memInWdth{.5},2*\inSep+\memInHght{1.5}
+  ) {\daiji{Data}} ;
+}{
+  \draw[rect, round]
+    (\inSep,2*\inSep+\memInHght{1}) --
+    (\inSep+\memInWdth{1},2*\inSep+\memInHght{1}) --
+    (\inSep+\memInWdth{1},2*\inSep+\memInHght{1}+\memInHght{1}) --
+    (\inSep,2*\inSep+\memInHght{1}+\memInHght{1}) --
+    cycle ;
+  \node[empty, align = center] () at (
+    \inSep+\memInWdth{.5},2*\inSep+\memInHght{1.5}
+  ) {Data} ;
+}
+
+
+% |===| Runtime.
+
+\uncover<2->{
+
+  \alt<6>{
+    \draw[rect, round, drw_green]
+      (\sep+\wdth,0) --
+      (\sep+2*\wdth,0) --
+      (\sep+2*\wdth,\hght) --
+      (\sep+\wdth,\hght) --
+      cycle ;
+    \node[
+      empty, minimum height = 1pt, anchor = south, align = center
+    ] () at (\sep+1.5*\wdth,\hght) {\daiji{Runtime}\vphantom{y}} ;
+  }{
+    \draw[rect, round]
+      (\sep+\wdth,0) --
+      (\sep+2*\wdth,0) --
+      (\sep+2*\wdth,\hght) --
+      (\sep+\wdth,\hght) --
+      cycle ;
+    \node[
+      empty, minimum height = 1pt, anchor = south, align = center
+    ] () at (\sep+1.5*\wdth,\hght) {Runtime\vphantom{y}} ;
+  }
+
+  \def\runInWdth#1{#1*\wdth-#1*2*\inSep}
+  \def\runInHght#1{#1*0.333333*\hght-#1*1.333333*\inSep}
+
+  \draw[rect, round]
+    (\sep+\inSep+\wdth,\inSep) --
+    (\sep+\inSep+\wdth+\runInWdth{1},\inSep) --
+    (\sep+\inSep+\wdth+\runInWdth{1},\inSep+\runInHght{1}) --
+    (\sep+\inSep+\wdth,\inSep+\runInHght{1}) --
+    cycle ;
+  \node[empty, align = center, text width = 10em] () at (
+    \sep+\inSep+\wdth+\runInWdth{.5},\inSep+\runInHght{.5}
+  ) {Memory\\management} ;
+
+  \alt<5,7,9->{
+    \draw[rect, round, drw_green]
+      (\sep+\inSep+\wdth,2*\inSep+\runInHght{1}) --
+      (\sep+\inSep+\wdth+\runInWdth{1},2*\inSep+\runInHght{1}) --
+      (\sep+\inSep+\wdth+\runInWdth{1},2*\inSep+\runInHght{2}) --
+      (\sep+\inSep+\wdth,2*\inSep+\runInHght{2}) --
+      cycle ;
+    \node[empty, align = center, text width = 10em] () at (
+      \sep+\inSep+\wdth+\runInWdth{.5},2*\inSep+\runInHght{1.5}
+    ) {\daiji{Data}\\\daiji{control}} ;
+  }{
+    \draw[rect, round]
+      (\sep+\inSep+\wdth,2*\inSep+\runInHght{1}) --
+      (\sep+\inSep+\wdth+\runInWdth{1},2*\inSep+\runInHght{1}) --
+      (\sep+\inSep+\wdth+\runInWdth{1},2*\inSep+\runInHght{2}) --
+      (\sep+\inSep+\wdth,2*\inSep+\runInHght{2}) --
+      cycle ;
+    \node[empty, align = center, text width = 10em] () at (
+      \sep+\inSep+\wdth+\runInWdth{.5},2*\inSep+\runInHght{1.5}
+    ) {Data\\control} ;
+  }
+
+  \alt<5,10>{
+    \draw[rect, round, drw_green]
+      (\sep+\inSep+\wdth,3*\inSep+\runInHght{2}) --
+      (\sep+\inSep+\wdth+\runInWdth{1},3*\inSep+\runInHght{2}) --
+      (\sep+\inSep+\wdth+\runInWdth{1},3*\inSep+\runInHght{3}) --
+      (\sep+\inSep+\wdth,3*\inSep+\runInHght{3}) --
+      cycle ;
+    \node[empty, align = center, text width = 10em] () at (
+      \sep+\inSep+\wdth+\runInWdth{.5},3*\inSep+\runInHght{2.5}
+    ) {\daiji{Sequence}\\\daiji{control}} ;
+  }{
+    \draw[rect, round]
+      (\sep+\inSep+\wdth,3*\inSep+\runInHght{2}) --
+      (\sep+\inSep+\wdth+\runInWdth{1},3*\inSep+\runInHght{2}) --
+      (\sep+\inSep+\wdth+\runInWdth{1},3*\inSep+\runInHght{3}) --
+      (\sep+\inSep+\wdth,3*\inSep+\runInHght{3}) --
+      cycle ;
+    \node[empty, align = center, text width = 10em] () at (
+      \sep+\inSep+\wdth+\runInWdth{.5},3*\inSep+\runInHght{2.5}
+    ) {Sequence\\control} ;
+  }
+
+}
+
+
+% |===| Processor.
+
+\uncover<3->{
+
+  \alt<8>{
+    \draw[rect, round, drw_green]
+      (2*\sep+2*\wdth,0) --
+      (2*\sep+3*\wdth,0) --
+      (2*\sep+3*\wdth,\hght) --
+      (2*\sep+2*\wdth,\hght) --
+      cycle ;
+    \node[
+      empty, anchor = south, align = center
+    ] () at (2*\sep+2.5*\wdth,\hght) {\daiji{Processor}\vphantom{y}} ;
+  }{
+    \draw[rect, round]
+      (2*\sep+2*\wdth,0) --
+      (2*\sep+3*\wdth,0) --
+      (2*\sep+3*\wdth,\hght) --
+      (2*\sep+2*\wdth,\hght) --
+      cycle ;
+    \node[
+      empty, anchor = south, align = center
+    ] () at (2*\sep+2.5*\wdth,\hght) {Processor\vphantom{y}} ;
+  }
+
+  \node[empty, align = center] () at (
+    2*\sep+2.5*\wdth,.5*\hght
+  ) {Operations} ;
+
+}
+
+
+% |===| Links between stuff.
+
+\uncover<2->{
+  \draw[line] (\wdth,.5*\hght) -- (\wdth+\sep,.5*\hght) ;
+}
+\uncover<3->{
+  \draw[line] (2*\wdth+\sep,.5*\hght) -- (2*\wdth+2*\sep,.5*\hght) ;
+}
+
+
+\end{tikzpicture}

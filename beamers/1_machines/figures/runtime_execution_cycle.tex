@@ -1,0 +1,125 @@
+\begin{tikzpicture}
+
+\small
+
+\def\wdth{5}
+\def\hght{3.2}
+\def\sep{2.3}
+
+
+\node[empty, color = cstm_orange] (title) at (2*\sep,1) {
+  Runtime execution cycle (simplified)
+} ;
+
+
+\node[empty] (start) at (0*\sep,1.4) {} ;
+
+\alt<5,10>{
+  \node[
+    rect, round, color = cstm_green, drw_red, 
+    minimum width = \wdth em, minimum height = \hght em, align = center
+  ] (fetch_inst) at (0*\sep,0) {
+    fetch next\\instruction
+  } ;
+}{
+  \node[
+    rect, round,
+    minimum width = \wdth em, minimum height = \hght em, align = center
+  ] (fetch_inst) at (0*\sep,0) {
+    fetch next\\instruction
+  } ;
+}
+\alt<5>{
+  \draw[arrow, drw_red] (start) -- (fetch_inst) ;
+}{
+  \draw[arrow] (start) -- (fetch_inst) ;
+}
+
+\alt<6>{
+  \node[
+    rect, round, color = cstm_green, drw_red,
+    minimum width = \wdth em, minimum height = \hght em, align = center
+  ] (decode) at (1*\sep,0) {
+    decode
+  } ;
+  \draw[arrow, drw_red] (fetch_inst) -- (decode) ;
+}{
+  \node[
+    rect, round,
+    minimum width = \wdth em, minimum height = \hght em, align = center
+  ] (decode) at (1*\sep,0) {
+    decode
+  } ;
+  \draw[arrow] (fetch_inst) -- (decode) ;
+}
+
+\alt<7>{
+  \node[
+    rect, round, color = cstm_green, drw_red,
+    minimum width = \wdth em, minimum height = \hght em, align = center
+  ] (fetch_op) at (2*\sep,0) {
+    fetch\\operands
+  } ;
+  \draw[arrow, drw_red] (decode) -- (fetch_op) ;
+}{
+  \node[
+    rect, round,
+    minimum width = \wdth em, minimum height = \hght em, align = center
+  ] (fetch_op) at (2*\sep,0) {
+    fetch\\operands
+  } ;
+  \draw[arrow] (decode) -- (fetch_op) ;
+}
+
+\alt<8>{
+  \node[
+    rect, round, color = cstm_green, drw_red,
+    minimum width = \wdth em, minimum height = \hght em, align = center
+  ] (execute) at (3*\sep,0) {
+    execute\\operations
+  } ;
+  \draw[arrow, drw_red] (fetch_op) -- (execute) ;
+}{
+\node[
+    rect, round,
+    minimum width = \wdth em, minimum height = \hght em, align = center
+  ] (execute) at (3*\sep,0) {
+    execute\\operations
+  } ;
+  \draw[arrow] (fetch_op) -- (execute) ;
+}
+
+\alt<9>{
+  \node[
+    rect, round, color = cstm_green, drw_red,
+    minimum width = \wdth em, minimum height = \hght em, align = center
+  ] (store) at (4*\sep,0) {
+    store\\result
+  } ;
+  \draw[arrow, drw_red] (execute) -- (store) ;
+}{
+  \node[
+    rect, round,
+    minimum width = \wdth em, minimum height = \hght em, align = center
+  ] (store) at (4*\sep,0) {
+    store\\result
+  } ;
+  \draw[arrow] (execute) -- (store) ;
+}
+
+\alt<10>{
+  \draw[arrow, drw_red]
+    (store.south) --
+    (4*\sep,-1) --
+    (0*\sep,-1) --
+    (fetch_inst.south) ;
+}{
+  \draw[arrow]
+    (store.south) --
+    (4*\sep,-1) --
+    (0*\sep,-1) --
+    (fetch_inst.south) ;
+}
+
+
+\end{tikzpicture}
