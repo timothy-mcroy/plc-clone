@@ -5,7 +5,8 @@
 
 \usepackage{
   etex, graphicx, amssymb, amsmath, amstext, amsfonts, mathtools,
-  multicol, pgfplots, array, listings, colortbl, ulem, ifthen, xcolor
+  multicol, pgfplots, array, listings, colortbl, ulem, ifthen, xcolor,
+  xspace
 }
 \usepackage[scaled=1]{beramono}
 \usepackage[T1]{fontenc}
@@ -86,7 +87,7 @@
 
 \vspace{4em}
 
-From sources to ``executable''
+From sources to runtime
 \medskip
 
 \alt<2->{
@@ -109,7 +110,7 @@ From sources to ``executable''
           \begin{itemize}
             \item compiler plugins
             \item macros
-            \item identation-has-semantics
+            \item indentation-has-semantics
             \item expressions over statements
           \end{itemize}
         }
@@ -191,10 +192,13 @@ Resources for Rust:\\
 
 \pause
 
-Assignments in \daiji{Rust}:
+Evaluation:
 
 \begin{itemize}
-  \item \emph{$2048$}
+  \item roughly \daiji{one assignment every three weeks} in Rust
+  \item a \daiji{midterm exam}
+  \item a \daiji{final project} you will choose,
+    most of the options use Rust
 \end{itemize}
 
 \end{frame}
@@ -236,14 +240,36 @@ Assignments in \daiji{Rust}:
     \uncover<4->{
       \text{
         \begin{tabular}{c}
-          abstractions, control flow, and\\
-          from \daiji{source} to \daiji{target}
+          from \daiji{source} to \daiji{target}\\
+          abstractions, control flow
         \end{tabular}
       }
     }
   \end{array}
 \]
 
+\end{frame}
+
+
+
+\begin{frame}{Programming languages}
+  Programming languages are \daiji{tools}
+  \bigskip
+
+  Depending on what the \daiji{task} is some tools are better\\
+  \emph{Programming Language Concepts} help us choose the best tool for
+  a use-case
+  \bigskip
+  \pause
+
+  Rust is \daiji{not} the ultimate tool for all tasks\\
+  but it's a \daiji{very rich} language with \daiji{recent},
+  \daiji{interesting} concepts
+  \smallskip
+  \begin{itemize}
+    \item \daiji{relevant} for desktop / server software
+    \item \daiji{irrelevant} for client-side web dev
+  \end{itemize}
 \end{frame}
 
 
@@ -276,115 +302,39 @@ What about them?
 
 
 
-\begin{frame}{Memory management}
-  \emph{Life cycle} of memory is always the same:
-  \smallskip
-  \begin{itemize}
-    \item \daiji{allocate} memory you need
-    \item \daiji{use} it (read / write)
-    \item \daiji{free} the memory when it is not used anymore
-  \end{itemize}
-  \medskip
 
-  Generally speaking,
-  \begin{itemize}
-    \item \daiji{allocation} is manual, happens when declaring a variable
-    \item \daiji{using} memory is manual: actual code
-  \end{itemize}
-\end{frame}
-
-
-
-\begin{frame}{Memory management}
-  \daiji{Freeing} memory is a challenge, in mainstream languages it can be
-  \begin{itemize}
-    \item \emph{manual}: \code{malloc} / \code{free}\\
-      \hfill C (\emph{1970}), C++\\
-      very old-skool
-    \item \emph{automatic} at runtime: garbage collection\\
-      \hfill Java (\emph{1995}), C\#, JavaScript, Python, F\#, OCaml, \ldots\\
-      \pause
-      Actually invented in \daiji{1959} for the Lisp language\\
-      pretty old-skool too
-  \end{itemize}
-\end{frame}
-
-
-
-
-\begin{frame}{Memory management}
-  \emph{Garbage collection} (GC):
-  \begin{itemize}
-    \item \daiji{easy} to use, because transparent to the developer
-    \item memory is \emph{automagically} freed when ``not used anymore''
-    \item<2-> \daiji{problem}: \emph{magic} is expensive in CS
-  \end{itemize}
-  \bigskip\uncover<3->{
-    \emph{Manual memory management}:
-    \begin{itemize}
-      \item \daiji{no overhead}, developer frees memory manually\\
-      \item<4-> but very complex and thus \daiji{error-prone} (memory leaks)
-      \item<4-> \daiji{Nightmare} for concurrent programs sharing data
-    \end{itemize}
-  }
-  \bigskip
-  \uncover<5->{
-    In general developers \daiji{$\heartsuit$} garbage collection:\\
-    mindless, and fast hardware hides the overhead anyway\ldots
-  }
-\end{frame}
-
-
-
-
-\begin{frame}{Problem solved?}
-  \emph{GC} shows its limits when doing \daiji{expensive computations},\\
-  with a lot of allocation
-  \bigskip
-
-  \begin{itemize}
-    \item \daiji{HPC} \hfill (High Performance Calculus, applied maths),
-    \item solving problems with \daiji{exponential complexity},
-    \item \daiji{web browsers} \hfill (surprisingly expensive),
-    \item \ldots
-  \end{itemize}
-\end{frame}
-
-
-
-
-\begin{frame}{Rust}
-
-Why Rust?
+\begin{frame}{Why?}
 
 \begin{center}
-  \url{http://www.cnet.com/news/samsung-joins-mozillas-quest-for-rust/}
+  \small\url{http://www.cnet.com/news/samsung-joins-mozillas-quest-for-rust/}
 \end{center}
 
 \bigskip
 
 \begin{tabular}{r l | r}
 \pause $\bullet$ &
-  memory / thread \daiji{safety} &
-  strong typing, ownership,\\
+  \daiji{performance} &
+  compiles to LLVM,\\
 & &
-  regional memory management\\\hline
+  (virtually) \emph{no garbage collection}\\
+& &
+  \emph{zero-cost} abstractions\\[.7em]
+
+\pause $\bullet$ &
+  memory / thread \daiji{safety} &
+  \emph{regional memory management}\\
+& &
+  strong typing, ownership, lifetimes\\[.7em]
 
 \pause $\bullet$ &
   powerful \daiji{abstractions} &
-  first-class functions, type classes\\\hline
+  first-class functions, type classes\\[.7em]
 
 \pause $\bullet$ &
   \daiji{defensive} approach &
   \code{Result} / \code{Option} instead of\\
 & &
-   exceptions and \code{null}\\\hline
-
-\pause $\bullet$ &
-  \daiji{performance} &
-  compiles to LLVM,\\
-& &
-  no garbage collection\\
+   exceptions and \code{null}
 \end{tabular}
 
 % \bigskip
@@ -403,16 +353,206 @@ Why Rust?
 
 
 
-\begin{frame}{Rust, in short}
 
+\begin{frame}{Problem}
+
+  Mainstream languages \daiji{lag} behind research in language theory
+  \bigskip
+
+  Most of them
   \begin{itemize}
+    \item still don't provide satisfactory solutions for \daiji{concurrency}
+    \item are \daiji{unsafe} (memory-wise, thread-wise, \ldots),
+      thus \daiji{not secure}
+    \item are rather \daiji{slow}:\\
+      \emph{virtual machine}, \emph{garbage collection}, \ldots
+    \item force more \daiji{repetition} than they need to:\\
+      lack of \emph{powerful abstractions}
+  \end{itemize}
+  \medskip
+
+  \pause
+
+  Software in general is more \daiji{unsafe}, \daiji{slow}, hard to
+  \daiji{write}, \daiji{read}, \daiji{maintain} and \daiji{extend} than it
+  could be.
+
+\end{frame}
+
+
+
+
+\begin{frame}{Rust in short}
+
+  \begin{itemize}\bigsep
     \item \daiji{safety} and \daiji{performance} first
-    \item support for \daiji{concurrency}
+    \item built-in support for \daiji{concurrency}
     \item hi-level \daiji{abstractions}
     \item avoid error-prone \daiji{paradigms}
+    \item encourage \daiji{genericity} and \daiji{extensibility}
+      (and documentation)\\
+      \daimpl reusability and maintainability
   \end{itemize}
 
 \end{frame}
+
+
+
+
+
+
+\begin{frame}{Example: memory management}
+  \emph{Life cycle} of memory is always the same:
+  \smallskip
+  \begin{itemize}
+    \item \daiji{allocate} memory you need
+    \item \daiji{use} it (read / write)
+    \item \daiji{free} the memory when it is not used anymore
+  \end{itemize}
+  \medskip
+
+  Generally speaking,
+  \begin{itemize}
+    \item \daiji{allocation} is manual, happens when declaring a variable
+    \item \daiji{using memory} is manual: actual code
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Memory management}
+  \daiji{Freeing} memory is a challenge, in mainstream languages it can be
+  \medskip
+  \begin{itemize}\bigsep
+    \item \emph{manual}: \code{malloc} / \code{free}\\
+      \prompt C (\emph{1970}), C++\\
+      very old-skool
+    \item \emph{automatic} at runtime: garbage collection\\
+      \prompt Java (\emph{1995}), C\#, JavaScript, Python, F\#, OCaml, \ldots\\
+      \pause
+      actually invented in \daiji{1959} for the Lisp language\\
+      pretty old-skool too
+  \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Memory management}
+  \emph{Garbage collection} (GC):
+  \begin{itemize}
+    \item \daiji{easy} to use, because transparent to the developer
+    \item memory is \emph{automagically} freed when ``not used anymore''
+    \item<2-> \daiji{problem}: \emph{magic} can be complex and expensive
+  \end{itemize}
+  \bigskip\uncover<3->{
+    \emph{Manual memory management}:
+    \begin{itemize}
+      \item \daiji{no overhead}, developer frees memory manually\\
+      \item<4-> but very complex and thus \daiji{error-prone} (memory leaks)
+      \item<4-> \daiji{nightmare} for concurrent threads sharing data
+    \end{itemize}
+  }
+  \bigskip
+  \uncover<5->{
+    In general developers \daiji{$\heartsuit$} garbage collection:\\
+    mindless, and fast hardware hides the overhead anyway\ldots
+  }
+\end{frame}
+
+
+
+
+\begin{frame}{Problem solved?}
+  \emph{GC} shows its limits when doing \daiji{expensive computations},\\
+  potentially with a lot of allocation
+  \bigskip
+
+  For instance
+  \smallskip
+  \begin{itemize}\bigsep
+    \item \daiji{HPC} \hfill (High Performance Calculus, applied maths),
+    \item solving problems with \daiji{exponential complexity},
+    \item \daiji{web browsers} \hfill (surprisingly expensive)
+  \end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Safety}
+  Catch as many problems as possible \daiji{statically} (compile-time)
+  \bigskip
+  \begin{center}
+    How much can we achieve with \daiji{type-checking}?\\
+    What is type-checking anyway?\\
+    What is a \daiji{type}?
+  \end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Types?}
+  A \daiji{type} usually tells
+  \begin{itemize}
+    \item the size of its values (\ita{e.g.} $64$ bits)
+    \item what it represents: an integer, a pair, a struct\ldots
+  \end{itemize}
+  \bigskip
+  \pause
+  With this information we can do \daiji{type-checking}:
+  \begin{itemize}
+    \item check that values \daiji{match} the type expected
+    \item \daiji{failing} to compile if that's not the case, and
+    \item \daiji{proving} ``integrity'' if the code type-checks
+  \end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}{More types}
+  Rust tries to do more: a type is
+  \begin{itemize}
+    \item the usual \emph{structural} information
+    \item whether the ``value'' is \daiji{mutable}
+    \item responsability for \daiji{freeing} memory: \emph{ownership}
+    \item \daiji{lifetimes} of \emph{references}
+  \end{itemize}
+  \bigskip
+  \pause
+  A program that type-checks is thus \daiji{proved}
+  \begin{itemize}
+    \item structurally \emph{sound}
+    \item \emph{memory-safe}
+      (memory leaks, dangling pointers, aliasing, \ldots)
+    \item \emph{thread-safe}
+      (race conditions, concurrent access, \ldots)
+  \end{itemize}
+  \medskip
+  \pause
+  When to \daiji{deallocate} memory is a by-product of the type-checking\\
+  \daimpl no overhead at runtime
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 % \begin{frame}[fragile]{\daiji{$2048$}: data abstraction}
