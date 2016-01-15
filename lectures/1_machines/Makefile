@@ -6,6 +6,10 @@ main:
 	pdflatex main.tex
 	mv main.pdf beamer.pdf
 
+one:
+	pdflatex main.tex
+	mv main.pdf beamer.pdf
+
 cob:
 	cp themes/cob.tex conf/colors.tex
 	pdflatex main.tex

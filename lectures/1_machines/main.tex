@@ -105,23 +105,32 @@
   They can
   \medskip
   \begin{itemize}
-  \item process \daiji{primitive data}
-  \item control the sequence of \daiji{execution of operations}
-  \item control \daiji{data transfers}
-  \item \daiji{manage memory}
+  \item process \daiji{primitive data}:\\
+    \hfill integers, floats, \ldots $\quad$
+    addition, multiplication, \ldots\\
+  \item control the sequence of \daiji{execution of operations}:\\
+    \hfill next instruction, \emph{jump}, \ldots
+  \item control \daiji{data transfers}:\\
+    \hfill from memory to registers, \emph{addressing modes}, \ldots
+  \item \daiji{manage memory}:\\
+    \hfill allocation, \emph{garbage collection}, \emph{stack}, \ldots
   \end{itemize}
   \bigskip
 
   \pause
 
-  More importantly they can \daiji{run}.
+  Also, they can \daiji{run}
 \end{frame}
 
 
 
 
-\begin{frame}{Intuition}
+\begin{frame}{Runtime: execution cycle}
   \input{figures/abstract_machine}
+
+  \uncover<1>{
+    What is the difference between \daiji{program} and \daiji{data}?
+  }
 
   \uncover<4->{
     \input{figures/runtime_execution_cycle}
@@ -177,7 +186,11 @@
   \begin{minipage}{.5\textwidth}
   Soldier crabs crossing path have a\\\daiji{deterministic} behavior
   \\\smallskip
-  We can \daiji{build circuits} as lanes
+  We can \daiji{build circuits} as lanes:
+  \begin{itemize}
+    \item $\top$ --- at least a crab
+    \item $\bot$ --- no crab
+  \end{itemize}
   \end{minipage}~\begin{minipage}{.49\textwidth}
     \begin{center}
       \begin{tikzpicture}
@@ -221,7 +234,7 @@
   Although it is \daiji{silly}, can we (at least in theory)
   \begin{itemize}
   \item do \daiji{arithmetic}? How?
-  \item implement sequence control / data transfer?
+  \item implement \daiji{sequence control} / \daiji{data transfer}?
   \end{itemize}
 \end{frame}
 
@@ -286,43 +299,76 @@
 
 
 
-\section{Implementation}
+\section{Abstract machine: implementation}
 
 
 
 \begin{frame}{Trade-off}
   Implementing a machine for a language is a trade-off between
   \begin{itemize}
-  \item \daiji{performance}
-  \item \daiji{flexibility} -- when the language evolves
-  \item \daiji{portability} -- diffusion of \emph{executables}
+    \item \daiji{performance}
+    \item \daiji{flexibility} \hfill when the language evolves
+    \item \daiji{portability} \hfill diffusion of \emph{executables}
   \end{itemize}
   \bigskip
   Eventually, code will run on a \emph{physical} machine, the \daiji{hardware}.
   \pause
   \\\bigskip
   Hardware-level is the reference \daiji{performance-wise}:\\
-  can't go faster than hardware by definition.
+  can't go faster than hardware by definition
 \end{frame}
 
 
-\begin{frame}{Implementation levels}
-  \daiji{Hardware}
+\begin{frame}{\daiji{Hardware}}
   \begin{itemize}
-  \item very fast
-  \item need to build new machines when language changes
-  \item can't share executable with different machines
+    \item very fast
+    \item need to build new machines when language changes
+    \item \emph{in general}, can't share executable with different machines
   \end{itemize}
   \bigskip
-  \daiji{Software}
+  By definition, \daiji{CPU instructions} are implemented in hardware
+\end{frame}
+
+
+
+
+\begin{frame}{\daiji{Software}}
   \begin{itemize}
-  \item very slow (compared to hardware) (why?)
-  \item easy to propagate changes in the language
-  \item can share with different machines (if runtime installed)
+    \item slow \emph{compared to hardware} (why?)
+    \item easy to propagate changes in the language
+    \item can share with different machines (if runtime installed)
   \end{itemize}
   \bigskip
-  \daiji{Firmware}\\
-  compromise between hardware and software
+  Pretty much \daiji{all} programming languages,
+  \emph{to various degrees}
+\end{frame}
+
+
+
+
+
+\begin{frame}{\daiji{Firmware}}
+  Compromise between hardware and software
+  \begin{itemize}
+    \item \emph{microcode}, \ita{a.k.a.} \emph{microprogramming}
+    \item happens at \emph{firmware} level:
+      \begin{itemize}
+        \item microcode/firmware is stored in fast, special memory
+        \item requires special equipment to write
+      \end{itemize}
+    \item level \daiji{directly above} the circuitery
+  \end{itemize}
+  \bigskip
+  \pause
+  \begin{itemize}
+    \item almost as fast as hardware
+    \item \emph{usually} updatable
+    \item \daiji{not portable}, tied to hardware
+  \end{itemize}
+  \bigskip
+  \pause
+  For instance, \emph{GPU}s, \emph{HDD}s, remote controls, embedded systems,
+  \ldots
 \end{frame}
 
 
