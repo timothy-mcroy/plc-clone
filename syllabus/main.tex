@@ -1,0 +1,241 @@
+\documentclass[10pt]{article}
+
+% |===| Package imports.
+
+\usepackage{
+  etex, graphicx, amssymb, amsmath, amstext, amsfonts, mathtools,
+  multicol, pgfplots, array, listings, colortbl, ulem, ifthen, hyperref,
+  url, xspace, multirow
+}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{fullpage}
+
+\usetikzlibrary{shapes,arrows}
+
+\renewcommand{\baselinestretch}{1.2}
+
+
+\newcommand{\ita}[1]{\textit{#1}}
+\newcommand{\tba}{\ita{TBA}\xspace}
+
+% |===| Title related things.
+
+\newcommand{\articleTitle}{
+  $22$c:$111$ (CS:$3820$) Programming Language Concepts\\
+  The University of Iowa, Spring 2016\\
+  Course Syllabus
+}
+\newcommand{\pdfTitle}{CS}
+
+% |===| Nice links.
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  pdftitle={\pdfTitle}
+}
+
+% |===| Title page info.
+
+\title{
+  \articleTitle
+}
+
+\author{
+  \textbf{Instructor:}\\
+  Dr. Adrien Champion\\
+  \href{mailto:adrien-champion@uiowa.edu}{adrien-champion@uiowa.edu}
+}
+
+
+\date{}
+
+\begin{document}
+
+
+\maketitle
+
+\section*{Lectures}
+Every Tuesday and Thursday $2$pm to $3:15$pm, $106$ GILH.
+
+
+\section*{Office hours}
+\tba
+
+
+\section*{Teaching assistant(s)}
+\tba
+
+
+\section*{Prerequisites}
+\begin{tabular}{l l}
+  $22$c$021$ (CS$2230$) & Computer Science II: Data Structures, and \\
+  $22$c$022$ (CS$2820$) & Computer Organization or \\
+  $22$c$022$ (CS$2820$) & Object-Oriented Software Development
+\end{tabular}
+
+
+\section*{Communication}
+
+This term we will be using \textbf{Piazza} for class discussion. The system is
+highly catered to getting you help fast and efficiently from classmates, the
+TA, and myself. Rather than emailing questions to the teaching staff, we
+encourage you to post your questions on Piazza.
+
+\centerline{
+  \url{https://piazza.com/uiowa/spring2016/cs3820/home}
+}
+
+\noindent
+The \textbf{lectures} and this syllabus are available on bitbucket on the
+repository
+
+\centerline{
+  \url{https://bitbucket.org/AdrienChampion/plc/overview}
+}
+
+\noindent
+Announcements on Piazza will let you know when the lectures are pushed to the
+bitbucket repository. Still, \textbf{we recommend} you \ita{follow} the
+repository to be notified as soon as possible of corrections, updates \ldots
+
+
+\section*{Course overview}
+
+In this class we will look at the design of modern programming languages. We
+discuss a notion of \ita{abstract machine} and implementation of a language.
+We will also define and study the concepts found in most languages: memory
+management, type checking, abstraction mechanisms \ldots
+
+We will use the \textbf{Rust} programming language in class and for most
+assignments / projects. Rust is a new, ambitious programming language based on
+relatively recent concepts. The result is a challenging, powerful language with
+features such as built-in parallelism, very strong static guarantees, powerful
+constructs, impressive efficiency. Rust benefits from a large community
+considering its young age. Rust was originally introduced by Mozilla and
+follows a completely open development process: many users end up contributing
+directly to the standard / official libraries.\newline
+
+No prior familiarity with any of these topics or Rust is assumed in this class.
+
+
+\section*{Outline}
+
+\begin{tabular}{c l | c l | c l}
+  1 & Abstract Machines
+    & 4 & Memory management
+    & 7 & Control abstraction \\
+  2 & Describing a language
+    & 5 & Names and environment
+    & 8 & Structuring data \\
+  3 & Foundations
+    & 6 & Control structures
+    & 9 & Data abstraction \\
+\end{tabular}
+
+
+\section*{Textbooks and readings}
+
+There is no required textbook although we recommend\\
+\begin{tabular}{| c}
+  \ita{Programming Languages: Principles and Paradigms},
+  Maurizio Gabbrielli and Simone Martini
+\end{tabular}\\
+available in an electronic edition at the library.
+
+
+\section*{Assignments, Exams and Grading}
+
+You will be graded for the following work, which make up the respective percentage of your final grade:
+\begin{itemize}\itemsep-1pt
+  \item 4 Homework Assignments (Programming Assignments), 40\%
+  \item In-class Miderm Exam, 20\%
+  \item Final Project, 30\%
+  \item Micro assignments, 10\%
+\end{itemize}
+Programming assignments will generally have a late deadline of a week. The penalty for turning in a programming assignment late is 10\%. After that, solutions will be posted and no late work accepted. A micro is a very small assignment, intended to take 20-30 minutes at most. Think of it as a take-home quiz, intended to reinforce concepts from class. Micro assignments will be posted at the end of some classes and are due right at the start of the following class (within first 3 minutes). Micros will not be accepted late.
+
+
+\section*{Collaboration Policy}
+
+The collaboration policy for programming assignments is that high-level
+discussion of problems is OK, but detailed collaboration on solutions is
+prohibited unless explicitly allowed. This means that unless explicitly
+allowed, you should not look over another person's code from the class (this
+includes writing the code together). You are not allowed to check that your
+solution makes sense by reading another person's code. Solutions whose
+similarity is too great to be a coincidence will be considered for possible
+academic integrity violation. No collaboration at all is allowed on micro
+assignments. I will protect your rights to a fair evaluation in this course
+through enforcement: cases of suspected cheating will be reported to the Dean's
+office, as required by CLAS policy.
+
+
+\section*{
+  Standard Policies from the College of Liberal Arts \& Sciences (CLAS)
+}
+
+\subsection*{Administrative Home}
+The College of Liberal Arts and Sciences is the administrative home of this
+course and governs matters such as the add/drop deadlines, the
+second-grade-only option, and other related issues. Different colleges may
+have different policies. Questions may be addressed to 120 Schaeffer Hall, or
+see the CLAS Academic Policies Handbook at
+\url{http://clas.uiowa.edu/students/handbook}.
+
+\subsection*{Electronic Communication}
+University policy specifies that students are responsible for all official
+correspondences sent to their University of Iowa e-mail address (@uiowa.edu).
+Faculty and students should use this account for correspondences (Operations
+Manual, III.15.2, k.11).
+
+\subsection*{Accommodations for Disabilities}
+A student seeking academic accommodations should first register with Student
+Disability Services and then meet with the course instructor privately in the
+instructor's office to make particular arrangements. See
+\url{www.uiowa.edu/~sds/} for more information.
+
+\subsection*{Academic Honesty}
+All CLAS students or students taking classes offered by CLAS have, in essence,
+agreed to the College's Code of Academic Honesty: ``I pledge to do my own
+academic work and to excel to the best of my abilities, upholding the IOWA
+Challenge. I promise not to lie about my academic work, to cheat, or to steal
+the words or ideas of others; nor will I help fellow students to violate the
+Code of Academic Honesty.'' Any student committing academic misconduct is
+reported to the College and placed on disciplinary probation or may be
+suspended or expelled (CLAS Academic Policies Handbook).
+
+\subsection*{CLAS Final Examination Policies}
+The final examination schedule for each class is announced by the Registrar
+generally by the fifth week of classes. Final exams are offered only during the
+official final examination period. No exams of any kind are allowed during the
+last week of classes. All students should plan on being at the UI through the
+final examination period. Once the Registrar has announced the date, time, and
+location of each final exam, the complete schedule will be published on the
+Registrar's web site and will be shared with instructors and students. It is
+the student's responsibility to know the date, time, and place of a final exam.
+
+\subsection*{Making a Suggestion or a Complaint}
+Students with a suggestion or complaint should first visit with the instructor
+(and the course supervisor), and then with the departmental DEO. Complaints
+must be made within six months of the incident (CLAS Academic Policies
+Handbook).
+
+\subsection*{Understanding Sexual Harassment}
+Sexual harassment subverts the mission of the University and threatens the
+well-being of students, faculty, and staff. All members of the UI community
+have a responsibility to uphold this mission and to contribute to a safe
+environment that enhances learning. Incidents of sexual harassment should be
+reported immediately. See the UI Comprehensive Guide on Sexual Harassment for
+assistance, definitions, and the full University policy.
+
+\subsection*{Reacting Safely to Severe Weather}
+In severe weather, class members should seek appropriate shelter immediately,
+leaving the classroom if necessary. The class will continue if possible when
+the event is over. For more information on Hawk Alert and the siren warning
+system, visit the Department of Public Safety website.
+
+\end{document}
