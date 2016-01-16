@@ -6,7 +6,7 @@
 \usepackage{
   etex, graphicx, amssymb, amsmath, amstext, amsfonts, mathtools,
   multicol, pgfplots, array, listings, colortbl, ulem, ifthen, xcolor,
-  xspace
+  xspace, multirow
 }
 \usepackage[scaled=1]{beramono}
 \usepackage[T1]{fontenc}
@@ -59,8 +59,10 @@
 }
 
 \author[]{
-  Adrien Champion\\
-  \href{mailto:adrien.champion@email.com}{adrien.champion@email.com}
+  Adrien Champion \\
+  \href{mailto:adrien-champion@uiowa.edu}{adrien-champion@uiowa.edu}\\[4pt]
+  Teaching assistant: Richard Blair \\
+  \href{mailto:richard-blair@uiowa.edu}{richard-blair@uiowa.edu}
 }
 
 
@@ -81,9 +83,114 @@
 \section{About the class}
 
 
+\begin{frame}{Schedule}
+  Lectures every \daiji{Tuesday} and \daiji{Thursday} 2pm -- 3:15pm, $106$ GILH
+  \bigskip
+
+  Office hours:
+  \begin{center}
+    \begin{tabular}{r | c c c}
+      \multirow{2}{*}{Adrien Champion} &
+        Tue &
+        3:30pm--5:30pm &
+        \multirow{2}{*}{\textit{TBA}} \\
+      &
+        Thu &
+        3:30pm--5pm \\ \hline
+      Richard Blair & & \textit{TBA}
+    \end{tabular}
+  \end{center}
+  \bigskip
+
+  Grading:
+  \begin{center}
+    \begin{tabular}{c l c}
+      $\bullet$ & 4 Homework Assignments (Programming Assignments) & $40$\%\\
+      $\bullet$ & In-class Miderm Exam & $20$\%\\
+      $\bullet$ & Final Project & $30$\%\\
+      $\bullet$ & Micro assignments & $10$\%
+    \end{tabular}
+  \end{center}
+\end{frame}
 
 
-\begin{frame}[fragile,t]{Programming languages}
+
+
+
+\begin{frame}{Assignments / Projects}
+
+\begin{itemize}
+  \bigsep
+  \item you \daiji{can} discuss ideas / algorithms
+  \item you \daiji{\bf CANNOT} share code
+  \item I \daiji{will not} deal with cheating, the university will
+\end{itemize}
+\bigskip
+
+\pause
+
+\begin{itemize}
+  \item assignments \daiji{in Rust}
+  \item a \daiji{final project} you will choose, most options use Rust
+\end{itemize}
+
+\end{frame}
+
+
+
+
+\begin{frame}{Resources}
+  \daiji{Piazza} for asking questions about, and discussing the class:\\
+  \centerline{
+    \url{https://piazza.com/class/ijfcsj0kxbf10l}
+  }
+  \bigskip
+
+  \daiji{Bitbucket} for lectures PDFs, syllabus, projects and assignments\\
+  \centerline{
+    \url{https://bitbucket.org/AdrienChampion/plc}
+  }
+\end{frame}
+
+
+
+
+\begin{frame}{Tools}
+  Software:
+  \medskip
+  \begin{itemize}
+    \item (private) version control (\daiji{bitbucket} or \daiji{github})
+    \item \daiji{Rust} compiler (\code{rustc}) and
+      project manager (\code{cargo})
+    \item unix-based system recommended (\daiji{VM} on Windows)
+  \end{itemize}
+  \bigskip
+
+  \pause
+
+  Resources for Rust:\\
+  \medskip
+  \begin{tabular}{r l}
+    official & \url{https://www.rust-lang.org/} \\
+    online compiler & \url{https://play.rust-lang.org/} \\
+    tutorial & \url{https://doc.rust-lang.org/stable/book/} \\
+    & \url{http://rustbyexample.com/} \\
+    API & \url{https://doc.rust-lang.org/stable/std/} \\
+    libraries & \url{https://crates.io/} \\
+  \end{tabular}
+\end{frame}
+
+
+
+
+
+
+
+\section{Introduction}
+
+
+
+\begin{frame}[fragile,t]{Keywords}
 
 \vspace{4em}
 
@@ -149,58 +256,34 @@ From sources to runtime
 
 
 
+\begin{frame}{Programming Languages Concepts}
+  What is the point of studying PLC anyway?
+  \medskip
+  \begin{itemize}
+    \item obviously useful for \daiji{language designers}
+    \item what about \daiji{developers}? \\
+      Many of the low level details are ``invisible'' to devs, why care?
+  \end{itemize}
+  \bigskip
+  \pause
 
-\begin{frame}{Guidelines}
-
-Software:
-\medskip
-\begin{itemize}
-  \item (private) version control (\daiji{bitbucket} or \daiji{github})
-  \item \daiji{Rust} compiler (\code{rustc}) and project manager (\code{cargo})
-  \item unix-based system recommended (\daiji{VM} on Windows)
-\end{itemize}
-\bigskip
-
-\pause
-
-Resources for Rust:\\
-\medskip
-\begin{tabular}{r l}
-  official & \url{https://www.rust-lang.org/} \\
-  online compiler & \url{https://play.rust-lang.org/} \\
-  tutorial & \url{https://doc.rust-lang.org/stable/book/} \\
-  & \url{http://rustbyexample.com/} \\
-  API & \url{https://doc.rust-lang.org/stable/std/} \\
-  libraries & \url{https://crates.io/} \\
-\end{tabular}
-
+  Programming languages are \daiji{tools}:
+  different tasks call for different tools
 \end{frame}
 
 
 
-
-
-\begin{frame}{Assignments / Projects}
-
-\begin{itemize}
-  \bigsep
-  \item you \daiji{can} discuss ideas / algorithms
-  \item you \daiji{\bf CANNOT} share code
-  \item I \daiji{will not} deal with cheating, the university will
-\end{itemize}
-\bigskip
-
-\pause
-
-Evaluation:
-
-\begin{itemize}
-  \item roughly \daiji{one assignment every three weeks} in Rust
-  \item a \daiji{midterm exam}
-  \item a \daiji{final project} you will choose,
-    most of the options use Rust
-\end{itemize}
-
+\begin{frame}{Programming Languages Concepts}
+  Studying \daiji{PLC}s lets us
+  \medskip
+  \begin{itemize}\bigsep
+    \item identify quickly the \daiji{best language} for a given task,
+    \item get a \daiji{good idea} of an unknown language quickly \\
+      by looking at a few keywords
+    \item write \daiji{better} code \\
+      thanks to a better understanding of
+      the \emph{abstractions} we write it with
+  \end{itemize}
 \end{frame}
 
 
@@ -248,28 +331,6 @@ Evaluation:
   \end{array}
 \]
 
-\end{frame}
-
-
-
-\begin{frame}{Programming languages}
-  Programming languages are \daiji{tools}
-  \bigskip
-
-  Depending on what the \daiji{task} is some tools are better\\
-  \emph{Programming Language Concepts} help us choose the best tool for
-  a use-case
-  \bigskip
-  \pause
-
-  Rust is \daiji{not} the ultimate tool for all tasks\\
-  but it's a \daiji{very rich} language with \daiji{recent},
-  \daiji{interesting} concepts
-  \smallskip
-  \begin{itemize}
-    \item \daiji{relevant} for desktop / server software
-    \item \daiji{irrelevant} for client-side web dev
-  \end{itemize}
 \end{frame}
 
 
@@ -364,7 +425,7 @@ What about them?
     \item still don't provide satisfactory solutions for \daiji{concurrency}
     \item are \daiji{unsafe} (memory-wise, thread-wise, \ldots),
       thus \daiji{not secure}
-    \item are rather \daiji{slow}:\\
+    \item are rather \daiji{slow} (may or may not be a problem):\\
       \emph{virtual machine}, \emph{garbage collection}, \ldots
     \item force more \daiji{repetition} than they need to:\\
       lack of \emph{powerful abstractions}
@@ -475,6 +536,10 @@ What about them?
     \item solving problems with \daiji{exponential complexity},
     \item \daiji{web browsers} \hfill (surprisingly expensive)
   \end{itemize}
+  \bigskip
+
+  Reason: GC \daiji{happens at runtime} and is \daiji{expensive} \\
+  \daiji{NB}: GC is not bad, but it has a cost you should be aware of
 \end{frame}
 
 
