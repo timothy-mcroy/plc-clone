@@ -3,7 +3,7 @@ all: main cleanTex
 main:
 	pdflatex main.tex
 	pdflatex main.tex
-	mv main.pdf article.pdf
+	mv main.pdf syllabus.pdf
 
 clean: cleanTex
 	rm -rf *.pdf *.tar.gz
