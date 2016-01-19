@@ -4,25 +4,25 @@ main:
 	cp themes/cob.tex conf/colors.tex
 	pdflatex main.tex
 	pdflatex main.tex
-	mv main.pdf beamer.pdf
+	mv main.pdf 0_intro.pdf
 
 cob:
 	cp themes/cob.tex conf/colors.tex
 	pdflatex main.tex
 	pdflatex main.tex
-	mv main.pdf beamer.pdf
+	mv main.pdf 0_intro.pdf
 
 cog:
 	cp themes/cog.tex conf/colors.tex
 	pdflatex main.tex
 	pdflatex main.tex
-	mv main.pdf beamer.pdf
+	mv main.pdf 0_intro.pdf
 
 bow:
 	cp themes/bow.tex conf/colors.tex
 	pdflatex main.tex
 	pdflatex main.tex
-	mv main.pdf beamer.pdf
+	mv main.pdf 0_intro.pdf
 
 figures:
 	./figures/generateFigures.sh
