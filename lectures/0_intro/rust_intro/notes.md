@@ -140,8 +140,6 @@ No semicolon? Because Rust is primarily expression-based.
 An expression corresponds (returns) to a **value**. A block `{ ... }` is an
 expression.
 
-Statements do not
-
 Only two kinds of statements:
 
 * declaration statements: `let blah = 7 ;`
