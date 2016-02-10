@@ -1,105 +1,55 @@
 //! This crate is a Rust tutorial for PLC 2016.
 
+// mod helpers ;
+// pub use helpers::* ;
+
+mod units ;
+pub use units::* ;
+pub use units::helpers::* ;
+
 /// This is the entry point.
-pub fn main() -> () {
+fn main() {
   //! Comment for main inside main.
-  use units::* ;
 
   println!("") ;
   println!("") ;
+  println!("|===| Running tests.") ;
 
-  let val = U::mk( 5f64, Length::Feet ) ;
+  let v_1 = 42.meters() ; // U::mk(42f64, Length::Meters) ;
+  let v_2 = 7.seconds() ;
+  v_1.print("| v_1:") ;
+  v_2.print("| v_2:") ;
 
-  println!("val = {}", val) ;
+  let v_3 = U::mk(19f64, Length::Miles) ;
+  v_3.print("| v_3:") ;
+
+  let v_4 = v_3 / v_2 ;
+  v_4.print("| v_4:") ;
+
+  let v_5 = 7.mph() ;
+  v_5.print("| v_5:") ;
+
+  let v_6 = U::mk(9f64, Frac::mk(Length::Meters, Time::Seconds)) ;
+  v_6.print("| v_6:") ;
+
+  let v_7 = U::mk(42f64, Frac::mk(Length::Miles, Time::Seconds)) ;
+  v_7.print("| v_7:") ;
+
+  let v = v_6.to_mps() ;
+  v.print("| v_6 to mps:") ;
+
+  let v = v.to_miph() ;
+  v.print("| v_6 to miph:") ;
+
+  let v = v.to_mph() ;
+  v.print("| v_6 to mph:") ;
+
+  let v = v.to_mps() ;
+  v.print("| v to mph:") ;
+
+  println!("|===|") ;
 
   println!("") ;
-  println!("") ;
-  ()
+  println!("")
 }
 
-
-pub mod units {
-  use std::fmt ;
-
-  /// Wrapper around a value storing the unit of the value.
-  pub struct U {
-    val: f64,
-    uni: Length,
-  }
-  impl U {
-    /// Creates a new wrapper around a value.
-    pub fn mk(val: f64, uni: Length) -> Self {
-      U { val: val, uni: uni }
-    }
-
-    /// A string representation of the value and its unit.
-    pub fn to_str(& self) -> String {
-      format!("{}{}", self.val, self.uni.to_str())
-    }
-
-    /// Converts the value to meters.
-    pub fn to_meters(self) -> Self {
-      let factor = self.uni.to_meters() ;
-      U::mk( self.val * factor, Length::Meters )
-    }
-    /// Converts the value to feet.
-    pub fn to_feet(self) -> Self {
-      let factor = self.uni.to_feet() ;
-      U::mk( self.val * factor, Length::Feet )
-    }
-    /// Converts the value to miles.
-    pub fn to_miles(self) -> Self {
-      let factor = self.uni.to_miles() ;
-      U::mk( self.val * factor, Length::Miles )
-    }
-  }
-
-  impl fmt::Display for U {
-    fn fmt(& self, fmt: & mut fmt::Formatter) -> fmt::Result {
-      write!(fmt, "{}{}", self.val, self.uni.to_str())
-    }
-  }
-
-  /// A length.
-  pub enum Length {
-    Meters,
-    Feet,
-    Miles,
-  }
-  impl Length {
-    /// A string representation of the value and its unit.
-    pub fn to_str(& self) -> String {
-      match * self {
-        Length::Meters => "m".to_string(),
-        Length::Feet => "ft".to_string(),
-        Length::Miles => "mi".to_string(),
-      }
-    }
-
-    /// Factor to convert to meters.
-    pub fn to_meters(& self) -> f64 {
-      match * self {
-        Length::Meters => 1.0,
-        Length::Feet   => 0.3048,
-        Length::Miles  => 1_609.344,
-      }
-    }
-    /// Factor to convert to feet.
-    pub fn to_feet(& self) -> f64 {
-      match * self {
-        Length::Meters => 3.281,
-        Length::Feet   => 1.0,
-        Length::Miles  => 5_280.0,
-      }
-    }
-    /// Factor to convert to miles.
-    pub fn to_miles(& self) -> f64 {
-      match * self {
-        Length::Meters => 0.00062137,
-        Length::Feet   => 0.000189,
-        Length::Miles  => 1.0,
-      }
-    }
-  }
-
-}

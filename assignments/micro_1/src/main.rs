@@ -34,19 +34,19 @@ pub fn main() {
   v_1.print("| v_1:") ;
   v_2.print("| v_2:") ;
 
-  let v_3 = 19.miles() ;
+  let v_3 = 19f64.miles() ;
   v_3.print("| v_3:") ;
 
   let v_4 = v_3 / 5f64.hours() ;
   v_4.print("| v_4:") ;
 
-  let v_5 = 7.mph() ;
+  let v_5 = 7f64.mph() ;
   v_5.print("| v_5:") ;
 
-  let v_6 = 9.mps() ;
+  let v_6 = 9f64.mps() ;
   v_6.print("| v_6:") ;
 
-  let v_7 = 42.mips() ;
+  let v_7 = 42f64.mips() ;
   v_7.print("| v_7:") ;
 
   let v = v_6.to_mps() ;
@@ -60,7 +60,7 @@ pub fn main() {
 
   println!("|===|") ;
 
-  // eval::test() ;
+  eval::eval::test() ;
 
   println!("")
 

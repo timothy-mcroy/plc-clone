@@ -1,17 +1,19 @@
 /// The unit module.
 
+use std::cmp::PartialEq ;
+
 mod wrap ;
 pub use self::wrap::* ;
 pub mod helpers ;
 
 /// Trait for units.
-pub trait Unit: Clone + Copy {
+pub trait Unit: Clone + Copy + PartialEq {
   /// String representation of a unit.
   fn to_str(& self) -> String ;
 }
 
 /// Length units.
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq)]
 pub enum Length {
   /// Meters.
   M,
@@ -70,7 +72,7 @@ impl Unit for Length {
 }
 
 /// Time units.
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq)]
 pub enum Time {
   /// Seconds.
   S,
@@ -129,7 +131,7 @@ impl Unit for Time {
 }
 
 /// Fraction of units.
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq)]
 pub struct Frac<Num, Den> {
   /// Numerator.
   num: Num,

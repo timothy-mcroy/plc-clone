@@ -127,8 +127,7 @@ project. For this one, it's `main.rs`.
 ///
 /// Uncomment the `#[cfg(test)]` once you have completed task 3 and want to
 /// test your code.
-#[cfg(test)]
-mod eval {
+pub mod eval {
 
   use rand::Rng ;
   use rand::os::OsRng ;
